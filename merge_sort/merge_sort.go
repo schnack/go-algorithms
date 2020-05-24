@@ -28,8 +28,8 @@ func MergeInt(data []int, first, second, count int) {
 		right[i] = data[second+i]
 	}
 
-	left[countLeft] = math.MaxInt64
-	right[countRight] = math.MaxInt64
+	left[countLeft] = int(math.MaxInt64)
+	right[countRight] = int(math.MaxInt64)
 
 	i := 0
 	j := 0
