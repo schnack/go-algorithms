@@ -17,8 +17,8 @@ func MergeInt(data []int, first, second, count int) {
 	countLeft := second - first
 	countRight := count - second
 
-	left := make([]int, countLeft+1)
-	right := make([]int, countRight+1)
+	left := make([]int, countLeft)
+	right := make([]int, countRight)
 
 	for i := 0; i < countLeft; i++ {
 		left[i] = data[first+i]
@@ -28,15 +28,18 @@ func MergeInt(data []int, first, second, count int) {
 		right[i] = data[second+i]
 	}
 
-	left[countLeft] = int(math.MaxInt64)
-	right[countRight] = int(math.MaxInt64)
-
 	i := 0
 	j := 0
 
 	for k := first; k < count; k++ {
 
-		if left[i] <= right[j] {
+		if len(left) == i {
+			data[k] = right[j]
+			j++
+		} else if len(right) == j {
+			data[k] = left[i]
+			i++
+		} else if left[i] <= right[j] {
 			data[k] = left[i]
 			i++
 		} else {
